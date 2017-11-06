@@ -1,7 +1,7 @@
 **Ansible-NodeJs**
 ===
 
-Provisioning de serveur NodeJs
+Provisioning of NodeJs server
 
 ----------
 
@@ -9,5 +9,5 @@ Provisioning de serveur NodeJs
 Documentation
 -------------
 
->- Penser a chercher les adresses dans le fichier hosts
->- commande:  `ansible-playbook -i hosts site.yml`
+>- Thinking to search addresses in the hosts file
+>- command:  `ansible-playbook -i hosts site.yml`

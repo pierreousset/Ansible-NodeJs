@@ -1,0 +1,47 @@
+---
+- name: Instalation
+  hosts: groupe
+  remote_user: root
+
+  tasks:
+    - name: Instalation nginx
+      apt: name=nginx update_cache=yes
+
+    - name: Instalation de curl
+      apt: name=curl update_cache=yes
+
+    - name: nginx restart
+      shell: service nginx restart
+
+    - name: Instalation dependance nodejs
+      shell: curl -sL https://deb.nodesource.com/setup_6.x | bash -
+
+    - name: Instalation nodejs
+      apt: name=nodejs update_cache=yes
+
+    - name: Instalation git
+      apt: name=git update_cache=yes
+
+    - name: Clonage du project git  Nodejs
+      git:
+        repo: https://git.mrzee.fr/student/my-node-project.git
+        dest: /var/www/my-node-project
+
+    - name: Instalation dependance 
+      npm:
+        path: /var/www/my-node-project/myapp
+
+    - name: Instalation pm2
+      shell: npm install -g pm2 
+
+    - name: pm2 start app
+      shell: pm2 start /var/www/my-node-project/myapp/bin/www
+
+    - name: Copie des vhosts
+      shell: cp /var/www/my-node-project/vhost /etc/nginx/sites-enabled/default
+
+    - name: Redemarrage de nginx
+      shell: service nginx restart
+
+    
+...
